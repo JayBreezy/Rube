@@ -50,8 +50,18 @@ public class drawplatform : MonoBehaviour {
 		// Get change in lengths from last frame
 		float deltaSize =  newSize.magnitude - oldSize;
 
+
 		// Change the progress bar based on the the change in line size
-		progressBar.SendMessage("changeSize", -1f * deltaSize);
+		float actualDeltaSize = progressBar.GetComponent<BarScript>().changeSize(-1f * deltaSize);
+		//print (deltaSize - actualDeltaSize);
+		/*if(actualDeltaSize < deltaSize - 0.01) {
+			//newSize.x = newSize.x + deltaSize - actualDeltaSize;
+			print ("Too big or too small");
+		}*/
+		//print (deltaSize);
+
+		// Adjust newSize to match actual change, which may be less than planned change if it hits min or max size
+		//newSize.x -= deltaSize;
 
 		// Update line object size and rotation
 		cube.transform.localScale = newSize;	
