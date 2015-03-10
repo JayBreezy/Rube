@@ -6,7 +6,7 @@ using UnityEngine.UI;
  */
 public class BarScript : MonoBehaviour {
 
-	public float baseVal = 100f;
+	public float baseVal = 1f;
 	public float curVal;
 	float xMax;
 	float unitsPerPerc;

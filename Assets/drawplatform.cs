@@ -3,6 +3,8 @@ using System.Collections;
 
 public class drawplatform : MonoBehaviour {
 
+	public float difficulty = 5f; // Max 100;
+
 	Vector3 lastPoint = Vector3.one;
 
 	public Transform progressBar;
@@ -57,7 +59,9 @@ public class drawplatform : MonoBehaviour {
 
 		// Change the progress bar based on the the change in line size
 		bool oldValidStatus = validLine;
-		validLine = progressBar.GetComponent<BarScript>().changeSize(-1f * deltaSize);
+		validLine = progressBar.GetComponent<BarScript>().changeSize(-1f * difficulty * deltaSize);
+
+		// Set line color
 		if(oldValidStatus != validLine) {
 			if(validLine) {
 				cube.GetComponent<Renderer>().GetComponent<Renderer>().material = gray;
@@ -66,16 +70,6 @@ public class drawplatform : MonoBehaviour {
 				cube.GetComponent<Renderer>().GetComponent<Renderer>().material = red;
 			}
 		}
-		//print (deltaSize - actualDeltaSize);
-		/*if(actualDeltaSize < deltaSize - 0.01) {
-			//newSize.x = newSize.x + deltaSize - actualDeltaSize;
-			print ("Too big or too small");
-		}*/
-		//print (deltaSize);
-
-		// Adjust newSize to match actual change, which may be less than planned change if it hits min or max size
-		//newSize.x -= deltaSize;
-
 		// Update line object size and rotation
 		cube.transform.localScale = newSize;	
 		float angle = Mathf.Atan2(lastPoint.y - newPoint.y, lastPoint.x - newPoint.x) * Mathf.Rad2Deg;
