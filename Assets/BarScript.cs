@@ -23,22 +23,28 @@ public class BarScript : MonoBehaviour {
 		//displayText.text = curVal.ToString();
 	}
 
-	public void changeSize(float delta) {
 
-		if(delta + curVal > baseVal) {
+	/*
+	 * Returns the amount the bar has changed
+	 */
+	public float changeSize(float delta) {
+
+		if(delta + curVal > baseVal) { // Too big, exceeds max size
+			float change = baseVal - curVal;
 			ResetBar();
-			return;
+			return change / unitsPerPerc;
 		}
-		else if(delta + curVal < 0) {
+		else if(delta + curVal <= 0) { // Too small, size ends up less than zero
+			float change = -1 * curVal;
 			curVal = 0;
 			transform.localScale = Vector3.zero;
+			return change / unitsPerPerc;
 		}
-
 		curVal += delta;
 		Vector3 temp = transform.localScale;
 		temp.x += delta * unitsPerPerc;
 		transform.localScale = temp;
-
+		return delta;
 	}
 
 	/*
