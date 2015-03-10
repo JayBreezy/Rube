@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class BarScript : MonoBehaviour {
 
 	public float baseVal = 100f;
-	float curVal;
+	public float curVal;
 	float xMax;
 	float unitsPerPerc;
 	public Text displayText;
@@ -20,37 +20,25 @@ public class BarScript : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		displayText.text = curVal.ToString();
+		//displayText.text = curVal.ToString();
 	}
 
-	/* 
-	 * shrink the bar by percent
-	 * will return 1 if unable to shrink by amount, else 0
-	 */
-	//TODO: fix return values
-	public void ShrinkBar(float percent){
+	public void changeSize(float delta) {
 
-		if (percent > curVal)
+		if(delta + curVal > baseVal) {
+			ResetBar();
 			return;
-			//return 1; UI buttons don't play nice with non void functions
+		}
+		else if(delta + curVal < 0) {
+			curVal = 0;
+			transform.localScale = Vector3.zero;
+		}
 
-		curVal -= percent;
+		curVal += delta;
 		Vector3 temp = transform.localScale;
-		temp.x -= percent * unitsPerPerc;
+		temp.x += delta * unitsPerPerc;
 		transform.localScale = temp;
 
-		return;
-		//return 0;
-	}
-
-	/*
-	 * adds to bar directly (can exceed 100%)
-	 */
-	public void GrowBar(float percent){
-		curVal += percent;
-		Vector3 temp = transform.localScale;
-		temp.x += percent * unitsPerPerc;
-		transform.localScale = temp;
 	}
 
 	/*

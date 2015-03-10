@@ -1,9 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/drawplatform.cs">
     <Files>
       <File FileName="Assets/cursor.cs" Line="13" Column="68" />
-      <File FileName="Assets/drawplatform.cs" Line="34" Column="59" />
+      <File FileName="Assets/drawplatform.cs" Line="36" Column="3" />
+      <File FileName="Assets/BarScript.cs" Line="31" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
