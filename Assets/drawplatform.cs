@@ -23,6 +23,13 @@ public class drawplatform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(Input.GetKeyUp(KeyCode.Escape)){
+			lastPoint = Vector3.one;
+			newPoint = Vector3.zero;
+			newSize = Vector3.zero;
+			GameObject.Destroy(cube.gameObject);
+			progressBar.GetComponent<BarScript>().revertToLocked();
+		}
 		if(Input.GetMouseButtonUp(0)) {
 			if(validLine) {
 				drawPlatform();
@@ -82,5 +89,6 @@ public class drawplatform : MonoBehaviour {
 		cube = Instantiate(line);
 		transformLine();
 		lastPoint = newPoint;
+		progressBar.GetComponent<BarScript>().lockVal();
 	}
 }

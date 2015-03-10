@@ -5,8 +5,8 @@ using UnityEngine.UI;
  * script for modifying and bookkeeping of limiting bars
  */
 public class BarScript : MonoBehaviour {
-
-	public float baseVal = 1f;
+	public float lockedVal;
+	public float baseVal = 100f;
 	public float curVal;
 	float xMax;
 	float unitsPerPerc;
@@ -17,13 +17,25 @@ public class BarScript : MonoBehaviour {
 		xMax = transform.localScale.x;
 		curVal = baseVal;
 		unitsPerPerc = xMax / baseVal;
+		print(unitsPerPerc);
+		lockedVal = baseVal;
 	}
 
 	void FixedUpdate(){
 		//displayText.text = curVal.ToString();
 	}
 
+	public void lockVal() {
+		lockedVal = curVal;
+	}
 
+	public void revertToLocked() {
+
+		curVal = lockedVal;
+		Vector3 temp = transform.localScale;
+		temp.x = lockedVal * unitsPerPerc;
+		transform.localScale = temp;
+	}
 
 	public bool changeSize(float delta) {
 
