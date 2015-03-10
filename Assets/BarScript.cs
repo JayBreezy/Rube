@@ -25,25 +25,20 @@ public class BarScript : MonoBehaviour {
 
 
 
-	public float changeSize(float delta) {
+	public bool changeSize(float delta) {
 
-		if(delta + curVal > baseVal) { // Too big, exceeds max size
-			float change = baseVal - curVal;
-			ResetBar();
-			return change;
-		}
-		else if(delta + curVal <= 0) { // Too small, size ends up less than zero
-			float change = -1 * curVal;
-			curVal = 0;
-			transform.localScale = Vector3.zero;
-			return change;
-		}
-		print ("standard");
 		curVal += delta;
+		if(curVal < 0) {
+			//curVal = 0;
+			Vector3 tmp = transform.localScale;
+			tmp.x = 0f;
+			transform.localScale = tmp;
+			return false;
+		}
 		Vector3 temp = transform.localScale;
 		temp.x += delta * unitsPerPerc;
 		transform.localScale = temp;
-		return delta;
+		return true;
 	}
 
 	/*

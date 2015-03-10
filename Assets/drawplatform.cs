@@ -8,10 +8,12 @@ public class drawplatform : MonoBehaviour {
 	public Transform progressBar;
 	public Transform line;
 	public Material gray;
+	public Material red;
 
 	private Transform cube;
 	private Vector3 newPoint;
 	private Vector3 newSize;
+	private bool validLine = true;
 	// Use this for initialization
 	void Start () {
 	
@@ -20,7 +22,9 @@ public class drawplatform : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetMouseButtonUp(0)) {
-			drawPlatform();
+			if(validLine) {
+				drawPlatform();
+			}
 		}
 		if(lastPoint.z != 1) transformLine();
 	}
@@ -52,7 +56,16 @@ public class drawplatform : MonoBehaviour {
 
 
 		// Change the progress bar based on the the change in line size
-		float actualDeltaSize = progressBar.GetComponent<BarScript>().changeSize(-1f * deltaSize);
+		bool oldValidStatus = validLine;
+		validLine = progressBar.GetComponent<BarScript>().changeSize(-1f * deltaSize);
+		if(oldValidStatus != validLine) {
+			if(validLine) {
+				cube.GetComponent<Renderer>().GetComponent<Renderer>().material = gray;
+			}
+			else {
+				cube.GetComponent<Renderer>().GetComponent<Renderer>().material = red;
+			}
+		}
 		//print (deltaSize - actualDeltaSize);
 		/*if(actualDeltaSize < deltaSize - 0.01) {
 			//newSize.x = newSize.x + deltaSize - actualDeltaSize;
@@ -70,11 +83,10 @@ public class drawplatform : MonoBehaviour {
 	}
 
 	void drawPlatform()
-	{	
+	{
 		newSize = Vector3.zero;
 		cube = Instantiate(line);
 		transformLine();
-		cube.GetComponent<Renderer>().GetComponent<Renderer>().material = gray;
 		lastPoint = newPoint;
 	}
 }
