@@ -46,16 +46,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-     <Compile Include="Assets\BarScript.cs" />
-     <Compile Include="Assets\drawplatform.cs" />
-=======
+     <Compile Include="Assets\GameManger.cs" />
      <Compile Include="Assets\Resources\Scripts\BarScript.cs" />
+     <Compile Include="Assets\Resources\Scripts\BlackHole.cs" />
      <Compile Include="Assets\Resources\Scripts\EnableMarble.cs" />
+     <Compile Include="Assets\Resources\Scripts\FinishScript.cs" />
      <Compile Include="Assets\Resources\Scripts\ObstacleGenerator.cs" />
      <Compile Include="Assets\Resources\Scripts\cursor.cs" />
      <Compile Include="Assets\Resources\Scripts\drawplatform.cs" />
->>>>>>> Stashed changes
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
